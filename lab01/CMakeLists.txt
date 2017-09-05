@@ -10,6 +10,10 @@ set(SOURCE_SUF "cpp")
 file(GLOB_RECURSE INCLUDES "${INCLUDE_DIR}/*.${INCLUDE_SUF}")
 file(GLOB_RECURSE SOURCES "${SOURCE_DIR}/*.${SOURCE_SUF}")
 
+if (CMAKE_COPMPILER_IS_GNUCXX)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
+endif()
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
@@ -22,6 +26,7 @@ include_directories(
 )
 
 add_executable(${PROJECT_NAME} ${INCLUDES} ${SOURCES})
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 14)
 target_link_libraries(
     ${PROJECT_NAME}
     Qt5::Widgets
