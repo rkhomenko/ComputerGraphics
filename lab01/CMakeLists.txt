@@ -20,7 +20,7 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt5Widgets REQUIRED)
 
 include_directories(
-    ${CANVAS_INCLUDE_DIR}
+    ${OPENGLWINDOW_INCLUDE_DIR}
     ${INCLUDE_DIR}
     ${Qt5Widgets_INCLUDE_DIRS}
 )
@@ -30,5 +30,5 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 14)
 target_link_libraries(
     ${PROJECT_NAME}
     Qt5::Widgets
-    ${CANVAS_LIBRARY_NAME}
+    ${OPENGLWINDOW_LIBRARY_NAME}
 )

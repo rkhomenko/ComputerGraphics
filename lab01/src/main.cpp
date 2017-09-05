@@ -1,4 +1,4 @@
-#include <Canvas.hpp>
+#include <OpenGLWindow.hpp>
 
 #include <QApplication>
 
@@ -7,7 +7,7 @@ int main(int argc, char** argv) {
     QCoreApplication::setOrganizationName("Khomenko and Co");
     QCoreApplication::setApplicationName("Computer Graphics Lab01");
 
-    Canvas canvas;
-    canvas.show();
+    OpenGLWindow window;
+    window.show();
     return app.exec();
 }

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.11)
 
-project(canvas)
+project(OpenGLWindow)
 
 set(INCLUDE_DIR "include")
 set(SOURCE_DIR "src")
