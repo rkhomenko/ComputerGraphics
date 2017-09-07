@@ -4,11 +4,11 @@
 #include <OpenGLWidgetVariables.hpp>
 
 #include <QOpenGLWidget>
-#include <QOpenGLFunctions>
+#include <QOpenGLFunctions_2_1>
 #include <QList>
 #include <QString>
 
-class OpenGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
+class OpenGLWidget : public QOpenGLWidget, protected QOpenGLFunctions_2_1 {
 public:
     OpenGLWidget(QWidget* parent = nullptr);
 
