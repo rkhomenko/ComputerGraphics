@@ -1,4 +1,6 @@
 #include <OpenGLWindow.hpp>
+#include <OpenGLWidget.hpp>
+#include <OpenGLWidgetVariables.hpp>
 
 #include <QtWidgets>
 #include <QRegExp>
@@ -6,7 +8,6 @@
 #include <QDebug>
 
 #include <random>
-#include <unordered_map>
 
 OpenGLWindow::OpenGLWindow(QOpenGLWidget* openGLWidget) {
     const char* regexStr =
@@ -22,6 +23,7 @@ OpenGLWindow::OpenGLWindow(QOpenGLWidget* openGLWidget) {
     auto validator = new QRegExpValidator(rx);
 
     LineEdit = new QLineEdit;
+    LineEdit->setFixedWidth(MIN_WIDTH / 2);
     LineEdit->setValidator(validator);
     connect(LineEdit, &QLineEdit::returnPressed, this, &OpenGLWindow::setVariables);
 
@@ -48,18 +50,26 @@ void OpenGLWindow::setVariables() {
 
     auto lines = input.split(SEP);
     QRegularExpression re(regexStr);
-    std::unordered_map<std::string, double> map;
+    OpenGLWidgetVariables variables;
     for (const auto& line : lines) {
         auto match = re.match(line);
         if (match.hasMatch()) {
-            map.insert(
+            auto variableName = match.captured(1);
+            auto variableValue = match.captured(2);
+            if (Variables.indexOf(variableName) < 0) {
+                qDebug() << "Undefined variable " << variableName << "!";
+                return;
+            }
+            variables.insert(
                 std::make_pair(
-                    match.captured(1).toStdString(),
-                    match.captured(2).toDouble()
+                    variableName.toStdString(),
+                    variableValue.toDouble()
                 )
             );
         }
     }
+
+    Widget->setVariables(variables);
 }
 
 void OpenGLWindow::defineVariables(const QList<QString>& list) {

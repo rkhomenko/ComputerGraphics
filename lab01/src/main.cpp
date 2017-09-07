@@ -1,5 +1,5 @@
 #include <OpenGLWindow.hpp>
-#include <OpenGLWidget.hpp>
+#include <Lab01Widget.hpp>
 
 #include <QApplication>
 #include <QSurfaceFormat>
@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
     format.setProfile(QSurfaceFormat::CoreProfile);
     QSurfaceFormat::setDefaultFormat(format);
 
-    auto widget = new OpenGLWidget();
+    auto widget = new Lab01Widget;
 
     OpenGLWindow window(widget);
     window.defineVariables({ "a", "B"});

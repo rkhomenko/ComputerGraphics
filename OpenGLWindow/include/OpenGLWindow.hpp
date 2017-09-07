@@ -7,6 +7,7 @@
 
 class QOpenGLWidget;
 class QLineEdit;
+class OpenGLWidget;
 
 class OpenGLWindow : public QMainWindow {
     Q_OBJECT
@@ -26,6 +27,7 @@ private:
 
     int Width;
     int Height;
+    OpenGLWidget* Widget;
     QLineEdit* LineEdit;
     QList<QString> Variables;
 };
