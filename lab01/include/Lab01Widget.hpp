@@ -11,6 +11,9 @@ protected:
     void initializeGL() override;
     void resizeGL(int width, int height) override;
     void paintGL() override;
+
+private:
+    void drawAxises(int count);
 };
 
 #endif // CG_LABS_LAB01WIDGET_HPP_

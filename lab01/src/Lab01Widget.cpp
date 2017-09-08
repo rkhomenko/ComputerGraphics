@@ -24,34 +24,94 @@ void Lab01Widget::paintGL() {
     Point p2 = { 0., 0. };
 
     glClear(GL_COLOR_BUFFER_BIT);
-    float delta = 0.001;
-    float a = 1.;
+    float delta = 0.00001;
 
     auto width = static_cast<float>(this->width());
     auto height = static_cast<float>(this->height());
+    float a = 0.3;
 
-    glColor3f(0.0, 0.0, 1.0);
-    glLineWidth(1.0);
-    glBegin(GL_LINES);
-    glVertex3f(-1. * width / 2., 0., 0.);
-    glVertex3f(width / 2., 0., 0.);
-    glEnd();
+    glEnable(GL_POINT_SMOOTH);
 
-    glBegin(GL_LINES);
-    glVertex3f(0., -1. * height / 2, 0.);
-    glVertex3f(0., height / 2, 0.);
-    glEnd();
+    drawAxises(3);
 
     glColor3f(1.0, 0.0, 0.0);
+    glBegin(GL_LINE_STRIP);
     for (float x = 0.; x < a - delta; x += delta) {
-        p1[0] = p2[0] = x;
-        p1[1] = std::sqrt((x * x * x) / (a - x));
-        p2[1] = -p1[1];
+        auto y = std::sqrt((x * x * x) / (a - x));
+        glVertex2f(x, y);
+    }
+    glEnd();
+    glBegin(GL_LINE_STRIP);
+    for (float x = 0.; x < a - delta; x += delta) {
+        auto y = - std::sqrt((x * x * x) / (a - x));
+        glVertex2f(x, y);
+    }
+    glEnd();
 
-        glBegin(GL_POINTS);
-        glVertex2fv(p1);
-        glVertex2fv(p2);
+    glEnable(GL_LINE_STIPPLE);
+    glLineStipple(1, 0xFF);
+
+    glBegin(GL_LINES);
+    glVertex3f(a, -1.0, 0.0);
+    glVertex3f(a, 1.0, 0.0);
+    glEnd();
+
+    glDisable(GL_LINE_STIPPLE);
+
+    glFlush();
+}
+
+void Lab01Widget::drawAxises(int count) {
+    const auto width = this->width();
+    const auto height = this->height();
+    const auto step = 0.2f;
+
+    auto k = (1.0 * height) / width;
+
+    glColor3f(0, 0, 1.);
+    glLineWidth(1.);
+
+    // OX
+    glBegin(GL_LINES);
+    glVertex3f(-1.0, 0.0, 0.0);
+    glVertex3f(1.0, 0.0, 0.0);
+    glEnd();
+
+    // OY
+    glBegin(GL_LINES);
+    glVertex3f(0.0, -1.0, 0.0);
+    glVertex3f(0.0, 1.0, 0.0);
+    glEnd();
+
+    glColor3f(0.752941, 0.752941, 0.752941);
+
+    for (auto y = step; y <= 1.0; y += step) {
+        glBegin(GL_LINES);
+        glVertex3f(-1.0, y, 0.0);
+        glVertex3f(1.0, y, 0.0);
         glEnd();
     }
+
+    for (auto y = -step; y >= -1.0; y -= step) {
+        glBegin(GL_LINES);
+        glVertex3f(-1.0, y, 0.0);
+        glVertex3f(1.0, y, 0.0);
+        glEnd();
+    }
+
+    for (auto x = step; x < 1.0; x += step) {
+        glBegin(GL_LINES);
+        glVertex3f(x, -1.0, 0.0);
+        glVertex3f(x, 1.0, 0.0);
+        glEnd();
+    }
+
+    for (auto x = -step; x > -1.0; x -= step) {
+        glBegin(GL_LINES);
+        glVertex3f(x, -1.0, 0.0);
+        glVertex3f(x, 1.0, 0.0);
+        glEnd();
+    }
+
     glFlush();
 }
