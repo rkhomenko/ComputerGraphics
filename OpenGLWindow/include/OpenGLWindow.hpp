@@ -21,7 +21,7 @@ private slots:
 
 private:
     static const int MIN_WIDTH = 640;
-    static const int MIN_HEIGHT = 480;
+    static const int MIN_HEIGHT = 640;
 
     void setTextEditParams();
 

@@ -14,7 +14,6 @@ OpenGLWindow::OpenGLWindow(QOpenGLWidget* openGLWidget) {
         "(\\s*([a-zA-Z]{1,6})\\s*=\\s*(\\d{1,6}(\\.\\d{1,6})?)\\s*;)+";
 
     Width = MIN_WIDTH;
-    Height = MIN_HEIGHT;
     setMinimumSize(MIN_WIDTH, MIN_HEIGHT);
 
     auto layout = new QVBoxLayout;
