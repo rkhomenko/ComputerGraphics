@@ -13,7 +13,7 @@ protected:
     void paintGL() override;
 
 private:
-    void drawAxises(int count);
+    void drawAxises();
 };
 
 #endif // CG_LABS_LAB01WIDGET_HPP_

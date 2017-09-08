@@ -18,21 +18,13 @@ void Lab01Widget::initializeGL() {
 void Lab01Widget::resizeGL(int width, int height) {}
 
 void Lab01Widget::paintGL() {
-    using Point = float[2];
-
-    Point p1 = { 0., 0. };
-    Point p2 = { 0., 0. };
+    const float delta = 0.00001;
+    const float a = 0.3;
 
     glClear(GL_COLOR_BUFFER_BIT);
-    float delta = 0.00001;
-
-    auto width = static_cast<float>(this->width());
-    auto height = static_cast<float>(this->height());
-    float a = 0.3;
-
     glEnable(GL_POINT_SMOOTH);
 
-    drawAxises(3);
+    drawAxises();
 
     glColor3f(1.0, 0.0, 0.0);
     glBegin(GL_LINE_STRIP);
@@ -61,7 +53,7 @@ void Lab01Widget::paintGL() {
     glFlush();
 }
 
-void Lab01Widget::drawAxises(int count) {
+void Lab01Widget::drawAxises() {
     const auto width = this->width();
     const auto height = this->height();
     const auto step = 0.2f;
