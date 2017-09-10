@@ -3,6 +3,10 @@
 
 #include <OpenGLWidget.hpp>
 
+#include <vector>
+
+class QOpenGLShaderProgram;
+
 class Lab01Widget : public OpenGLWidget {
 public:
     Lab01Widget(QWidget* parent = nullptr);
@@ -13,7 +17,18 @@ protected:
     void paintGL() override;
 
 private:
-    void drawAxises();
+    static const auto NUM_VERTICES = 4;
+    static const auto DIMENTION = 2;
+    static const GLfloat AxesVertices[ NUM_VERTICES * DIMENTION];
+    static const char* VertexShaderSource;
+    static const char* FragmentAxesShaderSource;
+    static const char* FragmentCurveShaderSource;
+
+    QOpenGLShaderProgram* AxesProgram;
+    QOpenGLShaderProgram* CurveProgram;
+    GLuint AxesPositionAttr;
+    GLuint CurvePositionAttr;
+    std::vector<GLfloat> CurveVertices;
 };
 
 #endif // CG_LABS_LAB01WIDGET_HPP_
