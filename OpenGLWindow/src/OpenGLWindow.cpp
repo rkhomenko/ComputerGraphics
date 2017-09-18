@@ -9,11 +9,10 @@
 
 #include <random>
 
-OpenGLWindow::OpenGLWindow(QOpenGLWidget* openGLWidget) {
+OpenGLWindow::OpenGLWindow(OpenGLWidget* openGLWidget) {
     const char* regexStr =
         "(\\s*([a-zA-Z]{1,6})\\s*=\\s*(\\d{1,6}(\\.\\d{1,6})?)\\s*;)+";
 
-    Width = MIN_WIDTH;
     setMinimumSize(MIN_WIDTH, MIN_HEIGHT);
 
     auto layout = new QVBoxLayout;
@@ -33,6 +32,8 @@ OpenGLWindow::OpenGLWindow(QOpenGLWidget* openGLWidget) {
     widget->setLayout(layout);
 
     setCentralWidget(widget);
+
+    Widget = openGLWidget;
 }
 
 void OpenGLWindow::setVariables() {
@@ -49,22 +50,17 @@ void OpenGLWindow::setVariables() {
 
     auto lines = input.split(SEP);
     QRegularExpression re(regexStr);
-    OpenGLWidgetVariables variables;
+    auto variables = new OpenGLWidgetVariables;
     for (const auto& line : lines) {
         auto match = re.match(line);
         if (match.hasMatch()) {
             auto variableName = match.captured(1);
             auto variableValue = match.captured(2);
-            if (Variables.indexOf(variableName) < 0) {
+            if (VariableList.indexOf(variableName) < 0) {
                 qDebug() << "Undefined variable " << variableName << "!";
                 return;
             }
-            variables.insert(
-                std::make_pair(
-                    variableName.toStdString(),
-                    variableValue.toDouble()
-                )
-            );
+            variables->insert(variableName, variableValue.toFloat());
         }
     }
 
@@ -84,5 +80,5 @@ void OpenGLWindow::defineVariables(const QList<QString>& list) {
     }
 
     LineEdit->setPlaceholderText(variablesExample);
-    Variables = list;
+    VariableList = list;
 }

@@ -4,8 +4,6 @@
 #include <QApplication>
 #include <QSurfaceFormat>
 
-#include <initializer_list>
-
 int main(int argc, char** argv) {
     QApplication app(argc, argv);
     QCoreApplication::setOrganizationName("Khomenko and Co");

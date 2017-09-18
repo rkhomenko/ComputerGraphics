@@ -1,9 +1,9 @@
 #ifndef CG_LABS_OPENGLWIDGETVARIABLES_HPP_
 #define CG_LABS_OPENGLWIDGETVARIABLES_HPP_
 
-#include <string>
-#include <unordered_map>
+#include <QString>
+#include <QMap>
 
-using OpenGLWidgetVariables = std::unordered_map<std::string, double>;
+using OpenGLWidgetVariables = QMap<QString, float>;
 
 #endif // CG_LABS_OPENGLWIDGETVARIABLES_HPP_

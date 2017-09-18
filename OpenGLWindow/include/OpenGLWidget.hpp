@@ -9,20 +9,25 @@
 #include <QString>
 
 class OpenGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {
+    Q_OBJECT
+
 public:
     OpenGLWidget(QWidget* parent = nullptr);
+    void setVariables(OpenGLWidgetVariables* variables);
 
-    void setVariables(const OpenGLWidgetVariables& variables);
+signals:
+    void VariablesChanged();
 
 protected:
-    double getVariable(const std::string& variableName) const;
+    float getVariable(const QString& variableName) const;
+    bool isEmptyVariables() const;
 
     virtual void initializeGL() = 0;
     virtual void resizeGL(int width, int height) = 0;
     virtual void paintGL() = 0;
 
 private:
-    OpenGLWidgetVariables Variables;
+    OpenGLWidgetVariables* Variables;
 };
 
 #endif  // CG_LABS_OPENGLWIDGET_HPP_
