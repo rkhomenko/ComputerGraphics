@@ -1,3 +1,8 @@
+/* Компьютерная графика: ЛР1
+ * Хоменко Роман 8О-308Б-15
+ * 2017
+ */
+
 #include <OpenGLWindow.hpp>
 #include <Lab01Widget.hpp>
 
